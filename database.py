@@ -1,12 +1,12 @@
-import mysql.connector
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from models import Base
 
-def get_db_connection():
-    connection = mysql.connector.connect(
-        host = "localhost",
-        user = "test",
-        password = "123456",
-        database = "product_db"
-    )
+DATABASE_URL = "mysql+mysqlconnector://test:123456@localhost:3306/product_db"
 
-    return connection
+engine = create_engine(DATABASE_URL)
+
+Base.metadata.create_all(bind=engine)
+
+LocalSession = sessionmaker(bind=engine)
 

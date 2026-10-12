@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from database import get_db_connection
-
+from database import LocalSession
+from models import Product
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -18,14 +18,11 @@ def home(req:Request):
 
 @app.get('/products', response_class=HTMLResponse)
 def products(req: Request):
-    connection = get_db_connection()
-    cursor = connection.cursor()
+    db = LocalSession()
 
-    cursor.execute("SELECT * FROM products")
-    products = cursor.fetchall()
+    products = db.query(Product).all()
 
-    cursor.close()
-    connection.close()
+    db.close()
 
 
     return  templates.TemplateResponse(

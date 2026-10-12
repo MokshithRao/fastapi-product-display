@@ -1,19 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Products</title>
 </head>
 <body>
-    <h1>Products</h1>
-    <p>These are the products</p>
-    {% for p in products %}
-    <div>
-        <h2>{{ p[0] }}</h2>
-        <h1>{{ p[1] }}</h1>
-        <h3>{{ p[2] }}</h3>
-    </div>
-    {% endfor %}
+    <h1>Our Products</h1>
+    <p>These are the products available in our store.</p>
+
+    <hr>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Price (₹)</th>
+        </tr>
+
+        {% for p in products %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.name }}</td>
+            <td>{{ p.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+
+    <a href="/">Back to Home</a>
+
 </body>
 </html>
