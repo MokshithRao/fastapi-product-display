@@ -10,7 +10,6 @@ templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
 def home(req:Request):
-    sai_hi = "Hello, Welcome to my cafe"
     return templates.TemplateResponse(
         request=req,
         name="home.html"
